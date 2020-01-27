@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">MiniSign</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_chats_fragment">hello chats</string>
+    <string name="hello_contacts_fragment">hello contact</string>
+    <string name="hello_groups_fragment">hello groups</string>
+    <string name="image">image</string>
+
+    //login activity
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forget_your_password">Forget your Password ?</string>
+    <string name="or">OR</string>
+    <string name="sign_in">Sign in</string>
+    <string name="facebook">FaceBook</string>
+    <string name="google">Google</string>
+    <string name="don_t_have_an_account">Don\'t have an account ?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="first_name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="phone_number">Phone Number</string>
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Login</string>
+    <string name="sign_out">Sign out</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="error_user_exists">User exist</string>
+    <string name="Registration_success">Registration success</string>
+    <string name="required">Required.</string>
+    <string name="required_10_digit">Required 10 digit.</string>
+    <string name="confirm_error">confirm password incorrect.</string>
+    <string name="find_friends">Find Friends</string>
+    <string name="settings">Settings</string>
+    <string name="log_out">Log out</string>
+    <string name="Name">Name</string>
+    <string name="Status">Status</string>
+    <string name="save">Save</string>
+    <string name="phone">Phone</string>
+
+</resources>

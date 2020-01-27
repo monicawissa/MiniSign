@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "125042409631",
+    "firebase_url": "https://mini-sign-aacba.firebaseio.com",
+    "project_id": "mini-sign-aacba",
+    "storage_bucket": "mini-sign-aacba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125042409631:android:16dd9ce08b20c81a5c62aa",
+        "android_client_info": {
+          "package_name": "com.example.minisign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125042409631-1odudtghlh6u0q29l7h227vvsl5bbff2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfKN6lB8c9W3rDeQNHfQVFZCpJNQvZAyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125042409631-1odudtghlh6u0q29l7h227vvsl5bbff2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

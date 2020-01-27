@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/main_app_bar"
+    android:background="@drawable/side_primary"
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:contentDescription="@string/image"
+        android:layout_gravity="start|left"
+        android:src="@drawable/mini_sign_back"
+        android:scaleType="fitXY"
+        />
+</androidx.appcompat.widget.Toolbar>
