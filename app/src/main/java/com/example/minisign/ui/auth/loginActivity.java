@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.minisign.ui.main.MainActivity;
 import com.example.minisign.R;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Objects;
 
 public class loginActivity extends AppCompatActivity {
     EditText email;
@@ -68,14 +71,15 @@ public class loginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
+                            Toast.makeText(loginActivity.this, "you are not registered", Toast.LENGTH_SHORT).show();
                             try {
-                                throw task.getException();
+                                throw Objects.requireNonNull(task.getException());
                             } catch(FirebaseAuthInvalidCredentialsException e) {
                                 email.setError(getString(R.string.error_invalid_email));
                                 email.requestFocus();
                             } catch(FirebaseAuthUserCollisionException e) {
                                 email.setError(getString(R.string.error_user_exists));
-                                email.requestFocus();
+                                password.requestFocus();
                             } catch(Exception e) {
                                 Log.e("taggg", e.getMessage());
                             }

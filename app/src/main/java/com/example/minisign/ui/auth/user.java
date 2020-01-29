@@ -26,6 +26,9 @@ public class user implements Serializable, Parcelable
     @SerializedName("password")
     @Expose
     private String password;
+    @SerializedName("status")
+    @Expose
+    private String status;
     public final static Creator<user> CREATOR = new Creator<user>() {
 
 
@@ -47,6 +50,8 @@ public class user implements Serializable, Parcelable
         this.email = ((String) in.readValue((String.class.getClassLoader())));
         this.phone = ((String) in.readValue((String.class.getClassLoader())));
         this.password = ((String) in.readValue((String.class.getClassLoader())));
+        this.status = ((String) in.readValue((String.class.getClassLoader())));
+
     }
 
     /**
@@ -71,6 +76,16 @@ public class user implements Serializable, Parcelable
         this.email = email;
         this.phone = phone;
         this.password = password;
+        status="";
+    }
+    public user(String firstName, String lastName, String email, String phone, String password,String status) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.status=status;
     }
 
     public String getFirstName() {
@@ -105,6 +120,14 @@ public class user implements Serializable, Parcelable
         this.phone = phone;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -119,6 +142,8 @@ public class user implements Serializable, Parcelable
         dest.writeValue(email);
         dest.writeValue(phone);
         dest.writeValue(password);
+        dest.writeValue(status);
+
     }
 
     public int describeContents() {

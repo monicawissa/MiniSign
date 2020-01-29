@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -102,11 +103,24 @@ public class SettingsActivity extends AppCompatActivity {
             phone_textInputLayout.setError(null);
         }
         if(!valid)return;
-        HashMap<String,String>profile_map=new HashMap<>();
+        final Map<String,Object> profile_map=new HashMap<>();
+//        myRef.child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    profile_map=dataSnapshot.getValue();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            }
+
+//        );
         profile_map.put("firstName",name);
         profile_map.put("status",status);
         profile_map.put("phone",phone);
-        myRef.child("Users").child(currentUserId).setValue(profile_map).addOnCompleteListener(new OnCompleteListener<Void>() {
+        myRef.child("Users").child(currentUserId).updateChildren(profile_map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {
