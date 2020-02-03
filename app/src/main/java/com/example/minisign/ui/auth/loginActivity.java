@@ -1,6 +1,7 @@
 package com.example.minisign.ui.auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,6 +20,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +58,8 @@ public class loginActivity extends AppCompatActivity {
         google_button=findViewById(R.id.login_google_button);
         face_button=findViewById(R.id.login_facebook_button);
     }
+
+
     public void sign_up(View view) {
         Intent intent=(new Intent(this, Registration.class));
         startActivity(intent);
@@ -59,8 +67,8 @@ public class loginActivity extends AppCompatActivity {
 
     }
     public void login(View view) {
-        String emaill = email.getText().toString().trim();
-        String passwordd = password.getEditText().getText().toString().trim();
+        final String emaill = email.getText().toString().trim();
+        final String passwordd = password.getEditText().getText().toString().trim();
 
         if (!validateForm()) {
             return;
@@ -85,12 +93,16 @@ public class loginActivity extends AppCompatActivity {
                             }
 
                         } else {
+                            SharedPreferences preferences= getSharedPreferences("lastlogin",MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("email",emaill);
+                            editor.putString("password",passwordd);
+                            editor.apply();
                             startActivity(new Intent(loginActivity.this, MainActivity.class));
                             finish();
                         }
                     }
                 });
-
     }
 
     public void forget_your_password(View view) {
