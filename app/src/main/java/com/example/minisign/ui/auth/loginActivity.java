@@ -93,7 +93,6 @@ public class loginActivity extends AppCompatActivity {
                             }
 
                         } else {
-                            //
                             SharedPreferences preferences= getSharedPreferences("lastlogin",MODE_PRIVATE);
                             SharedPreferences.Editor editor=preferences.edit();
                             editor.putString("email",emaill);
