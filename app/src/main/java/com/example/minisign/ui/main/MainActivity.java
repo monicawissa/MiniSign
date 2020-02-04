@@ -1,18 +1,24 @@
 package com.example.minisign.ui.main;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.minisign.R;
 import com.example.minisign.ui.auth.loginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
@@ -38,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase database ;
     DatabaseReference myRef ;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +51,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-
         tabsAdapter=new tabsAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tabsAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-
 
     }
 
@@ -99,15 +102,66 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    private void RequestNewGroup() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this,R.style.AlertDialog);
+        builder.setTitle("Enter group name");
+
+        final EditText text=new EditText(MainActivity.this);
+        text.setHint("\n e.g our MiniSign Team \n");
+        builder.setView(text);
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String groupname=text.getText().toString();
+                if(groupname.isEmpty())
+                {
+                    Toast.makeText(MainActivity.this,"Enter group name..",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    CreateNewGroup(groupname);
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.show();
+    }
+
+    private void CreateNewGroup(final String groupname) {
+        database.getReference().child("Groups").child(groupname).setValue("")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                            Toast.makeText(MainActivity.this, groupname+"group is created successfully",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
          super.onOptionsItemSelected(item);
+
          if(item.getItemId()==R.id.log_out_option){
              mAuth.signOut();
+             SharedPreferences preferences= getSharedPreferences("lastlogin",MODE_PRIVATE);
+             SharedPreferences.Editor editor=preferences.edit();
+             editor.putString("email","");
+             editor.putString("password","");
+             editor.apply();
              sendUsertoLoginActiivity();
          }
          else if(item.getItemId()==R.id.settings_option){
              sendUsertosettingsActiivity();
+         }
+         else if (item.getItemId()==R.id.create_group)
+         {
+             RequestNewGroup();
          }
          else if(item.getItemId()==R.id.find_friend_option){
 
